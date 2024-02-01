@@ -38,10 +38,6 @@ export default function Page({ user }) {
   return (
     <>
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://video-react.github.io/assets/video-react.css"
-        />
         <title>Find Clients For Your Agency and Build Websites</title>
         <meta
           name="description"
@@ -67,7 +63,7 @@ export default function Page({ user }) {
         <HeroSection />
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#2e3a5e" fill-opacity="1" d="M0,32L48,64C96,96,192,160,288,176C384,192,480,160,576,144C672,128,768,128,864,117.3C960,107,1056,85,1152,80C1248,75,1344,85,1392,90.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        <path fill="#2e3a5e" fillOpacity="1" d="M0,32L48,64C96,96,192,160,288,176C384,192,480,160,576,144C672,128,768,128,864,117.3C960,107,1056,85,1152,80C1248,75,1344,85,1392,90.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
       </svg>
       <div className="bg-gray-50 md:mt-[-4rem] mt-28">
         <Price />
