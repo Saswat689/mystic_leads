@@ -35,7 +35,7 @@ export default function Performance() {
         >
           Get detailed SEO analysis and performance/speed reports with mystic
           leads easy to use seo optimization tool. Never worry about spending a
-          lot of money on SEO experts ever again.
+          lot of money on SEO experts ever again
         </p>
         <div
           className={
