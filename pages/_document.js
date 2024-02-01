@@ -8,10 +8,6 @@ export default function Document() {
       style={{ scrollBehavior: "smooth" }}
     >
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://video-react.github.io/assets/video-react.css"
-        />
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <body className="p-0 m-0 overflow-hidden">

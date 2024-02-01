@@ -2,6 +2,7 @@ import "grapesjs/dist/css/grapes.min.css";
 import "@/components/dashboard/grapejs/styles/grapes.css";
 import "@/components/dashboard/grapejs/styles/editor.css";
 import "@/styles/globals.css";
+import 'video-react/dist/video-react.css'; // import css
 
 import axios from "axios";
 import Script from "next/script";
