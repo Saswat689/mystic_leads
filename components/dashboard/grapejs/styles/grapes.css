@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+    overflow-x: hidden;
+}
+
+.gjs-blocks-c {
+    justify-content: center;
+    height: fit-content;
+}
+
+.section__title {
+    height: 40px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: grid;
+    place-items: center;
+    padding: 4px;
+    margin-bottom: 4px;
+    color: #f59e0b
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #0b0f1a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #f59e0b;
+    border-radius: 4px;
+}

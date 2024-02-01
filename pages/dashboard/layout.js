@@ -1,0 +1,39 @@
+import Sidebar from "@/components/dashboard/sidebar";
+import { useState } from "react";
+import Head from "next/head";
+
+export default function Layout({ children }) {
+  const [activeSideBar, setActiveSideBar] = useState(false);
+
+  return (
+    <div className="flex w-full h-screen overflow-hidden">
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <button
+        className={`absolute left-0 ${
+          activeSideBar ? "hidden" : "block"
+        } p-3 sm:hidden top-[10%] outline-none border-none bg-[#11182a] rounded-tr-xl rounded-br-xl`}
+        onClick={() => {
+          setActiveSideBar(activeSideBar ? false : true);
+          console.log(activeSideBar)
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#f59e0b"
+          data-name="Layer 1"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path d="M0,3.5c0-.83,.67-1.5,1.5-1.5H17.5c.83,0,1.5,.67,1.5,1.5s-.67,1.5-1.5,1.5H1.5c-.83,0-1.5-.67-1.5-1.5Zm17.5,14.5H1.5c-.83,0-1.5,.67-1.5,1.5s.67,1.5,1.5,1.5H17.5c.83,0,1.5-.67,1.5-1.5s-.67-1.5-1.5-1.5Zm5-8H6.5c-.83,0-1.5,.67-1.5,1.5s.67,1.5,1.5,1.5H22.5c.83,0,1.5-.67,1.5-1.5s-.67-1.5-1.5-1.5Z" />
+        </svg>
+      </button>
+      <Sidebar active={activeSideBar}  setActiveSideBar={setActiveSideBar}/>
+      <main className="w-full h-screen md:px-12 px-4 overflow-hidden overflow-y-scroll bg-gray-100">
+        {children}
+      </main>
+    </div>
+  );
+}
