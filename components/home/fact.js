@@ -1,4 +1,4 @@
-import { mont, roboto } from "@/config";
+import { mont } from "@/config";
 import CheckIcon from "@mui/icons-material/Check";
 
 export default function Fact() {

@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Button from "../primary-button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { mont, roboto } from "@/config";
+import { roboto } from "@/config";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";

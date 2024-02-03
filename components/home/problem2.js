@@ -1,5 +1,4 @@
 import { mont } from "@/config";
-import Link from "next/link";
 
 export default function Problem2() {
 
