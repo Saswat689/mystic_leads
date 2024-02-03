@@ -20,7 +20,7 @@ export default function Page() {
         These policies and procedures apply to all products and/or services
         from:
         <br />
-        LeadsGorilla (LeadsGorilla.io)
+        Mystic Leads (mysticleads.com)
       </p>
       <h2>Returns</h2>
       <p className="leading-loose font-[600] text-gray-700">

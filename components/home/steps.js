@@ -11,8 +11,7 @@ export default function StepsSection() {
         <SpeedIcon className="text-amber-500" style={{ fontSize: 60 }} />
       </p>
       <h2 className={"heading " + mont.className}>
-        3 Steps to Finding your Next <br /> Paying Customer in{" "}
-        <span className="text-amber-500">60 seconds</span>
+        Fastest Way to Generate Leads <br /> For Your <span className="text-amber-500">Digital Agency</span>
       </h2>
 
       <p className={"leading-para "+mont.className}>

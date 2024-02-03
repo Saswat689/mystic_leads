@@ -8,7 +8,7 @@ export default function Solution() {
     >
       <div className="flex justify-center w-full py-8 text-white px-2 md:px-0 bg-blue-500 rounded-t-2xl">
         <h2 className="heading mb-0 md:text-[2.7rem] text-[1.7rem] tracking-wider">
-          Here's why its bad for them but great for you
+          Solve Your Lead's Painpoints The Right Way
         </h2>
       </div>
       <div className="flex flex-col justify-between p-8 lg:flex-row flex-r gap-x-8">

@@ -22,7 +22,7 @@ export default function Performance() {
   };
 
   return (
-    <div className={"md:py-20 lg:px-12 py-8 my-12 md:my-0 " + mont.className}>
+    <div className={"md:py-20 lg:px-12 py-8 md:my-0 " + mont.className}>
       <div className={`md:py-20 bg-[url('/blob-scene-haikei.svg')] bg-cover rounded-lg bg-center bg-no-repeat`}>
         <h2 className="heading">
           Full <span className="text-amber-500">SEO</span> and{" "}

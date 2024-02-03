@@ -70,12 +70,12 @@ export default function Page({ user }) {
         <StepsSection />
         <Problems />
         <Fact />
+        <Leads />
+        <Website />
         <Solution />
         <Problem2 />
         <Services />
         <Testimonials />
-        <Website />
-        <Leads />
         <Performance />
         <AIWriter />
         <Accordion />

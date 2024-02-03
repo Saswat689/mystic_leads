@@ -1,5 +1,4 @@
 import { mont, roboto } from "@/config";
-import Link from "next/link";
 
 export default function Leads() {
   let vidContainerChild = {
@@ -25,7 +24,7 @@ export default function Leads() {
     <div
     id="tool"
       className={
-        "md:p-12 p-8 bg-blue-50 rounded-2xl md:mx-8 mx-2 relative " +
+        "md:p-12 p-8 bg-blue-50 rounded-2xl mb-8 md:mx-8 mx-2 relative " +
         mont.className
       }
     >

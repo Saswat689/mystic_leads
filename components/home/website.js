@@ -23,7 +23,7 @@ export default function Website() {
   };
 
   return (
-    <div className={"py-12 lg:px-12 px-4 " + mont.className}>
+    <div className={"py-12 lg:px-12 px-4 mb-12 " + mont.className}>
       <h2 className="heading">
         And Then There's Our{" "}
         <span className="text-amber-500">Website Builder</span> <br />

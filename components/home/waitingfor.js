@@ -5,7 +5,7 @@ export default function WaitingFor() {
   return (
     <div
       className={
-        "md:w-[90%] w-full rounded-md md:p-8 py-4 bg-blue-50 mx-auto my-12 " +
+        "md:w-[90%] w-full rounded-md md:p-8 py-8 bg-blue-50 mx-auto my-12 " +
         mont.className
       }
     >
@@ -26,7 +26,7 @@ export default function WaitingFor() {
           className="primary-btn mt-4 md:text-lg text-sm px-8 py-3 rounded-full md:px-16 md:py-2 uppercase mx-auto"
           href="/auth/register"
         >
-          Get started with $37/monthly
+          Quick Start
         </Link>
       </div>
     </div>

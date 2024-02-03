@@ -1,11 +1,10 @@
-import { mont, roboto } from "@/config";
-import Image from "next/image";
+import { mont } from "@/config";
 
 export default function Testimonials() {
 
   return (
-    <div className={"py-20 px-4 " + mont.className}>
-      <p className="text-center my-0 py-0 font-[900] uppercase mb-4 md:text-2xl text-lg text-blue-500">
+    <div className={"pt-20 px-4 " + mont.className}>
+      <p className="text-center my-0 py-0 font-[900] uppercase md:text-2xl text-lg text-blue-500">
         Testimonials
       </p>
       <h2 className="heading">
