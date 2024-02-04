@@ -53,6 +53,7 @@ export default function Page({ user }) {
           content="Your search for a lead generation and client closing tool ends here. Mystic Leads allows you to contact unlimited businesses and websites with its special AI powered tools."
         />
         <meta property="og:image" content="/og-img.png" />
+        <meta name="google-site-verification" content="nnwWcX7fIc3gEofp8pv87ZY97j1OvTIxHXdMvgsjmXI" />
       </Head>
       <div className="bg-gradient-to-b from-[#11182a] via-[#1d2741] to-[#2e3a5e]">
         <ResponsiveAppBar
@@ -72,6 +73,9 @@ export default function Page({ user }) {
         <Fact />
         <Leads />
         <Website />
+        <div className="mb-20">
+        <Price />
+        </div>
         <Solution />
         <Problem2 />
         <Services />
