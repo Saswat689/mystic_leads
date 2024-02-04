@@ -14,7 +14,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import gemini from "@/components/gemini";
 import axios from "axios";
 
-export default function Page({ campaigns, username }) {
+export default function Page({ campaigns, username,freeTrial }) {
   const [pf, setPf] = useState("");
   const [selectedCampaign, setSelectedCampaign] = useState("");
   const [selectedLead, setSelectedLead] = useState("");
@@ -92,7 +92,7 @@ export default function Page({ campaigns, username }) {
   console.log(selectedLead);
 
   return (
-    <Layout>
+    <Layout freeTrial={freeTrial}>
       <div className={"w-full h-full py-8 " + roboto.className}>
         {!response && (
           <div className="flex py-8 pl-8 pr-0 text-white bg-blue-600 rounded-lg shadow-lg gap-x-4">
@@ -493,23 +493,39 @@ export async function getServerSideProps(context) {
       }
     );
 
-    //unpaid user don't allow access
-    if (!data.document?.hasPaid) {
-      return { redirect: { destination: "/payment/new" } };
-    }
+    //if user not paid and free trial over(acc older than 1 day)
+    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
 
-    return {
-      props: {
-        email: session.user.email || null,
-        username: data.document.username,
-        campaigns: data.document?.campaigns || [],
-      },
-    };
+    if (!data.document?.hasPaid) {
+      if (accAge > 1) {
+        //1 day free trial expired
+        return { redirect: { destination: "/payment/new" } };
+      } else {
+        return {
+          props: {
+            freeTrial: true,
+            email: session.user.email || null,
+            username: data.document.username,
+            campaigns: data.document?.campaigns || [],
+          },
+        };
+      }
+    } else {
+      return {
+        props: {
+          freeTrial: false,
+          email: session.user.email || null,
+          username: data.document.username,
+          campaigns: data.document?.campaigns || [],
+        },
+      };
+    }
   } catch (e) {
     console.log(e);
     return {
       props: {
-        email: "",
+        freeTrial: true,
+        email: null,
         username: "",
         campaigns: [],
       },

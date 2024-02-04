@@ -12,7 +12,7 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 
-export default function Page({ campaigns }) {
+export default function Page({ campaigns,freeTrial }) {
   let [campaign, setCampaign] = useState(null);
   let [selectedLeads, setSelectedLeads] = useState([]);
   const tbl = useRef(null);
@@ -62,7 +62,7 @@ export default function Page({ campaigns }) {
   }, []);
 
   return (
-    <Layout>
+    <Layout freeTrial={freeTrial}>
       <div className={"w-full h-full overflow-x-hidden " + roboto.className}>
         <div className="flex justify-between items-center">
           <h1>{campaign?.name}</h1>
@@ -178,25 +178,39 @@ export async function getServerSideProps(context) {
       }
     );
 
-    console.log(data)
+    //if user not paid and free trial over(acc older than 1 day)
+    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24) //account age in days
 
-    //unpaid user don't allow access
     if (!data.document?.hasPaid) {
-      return { redirect: { destination: "/payment/new" } };
+      if (accAge > 1) {
+        //1 day free trial expired
+        return { redirect: { destination: "/payment/new" } };
+      } else {
+        return {
+          props: {
+            freeTrial: true,
+            email: session.user.email || null,
+            username: data.document.username,
+            campaigns: data.document?.campaigns || [],
+          },
+        };
+      }
+    } else {
+      return {
+        props: {
+          freeTrial: false,
+          email: session.user.email || null,
+          username: data.document.username,
+          campaigns: data.document?.campaigns || [],
+        },
+      };
     }
-
-    return {
-      props: {
-        email: session.user.email || null,
-        username: data.document.username,
-        campaigns: data.document?.campaigns || [],
-      },
-    };
   } catch (e) {
-    console.log(e,'err');
+    console.log(e);
     return {
       props: {
-        email: "",
+        freeTrial: true,
+        email: null,
         username: "",
         campaigns: [],
       },

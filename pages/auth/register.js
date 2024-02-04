@@ -34,7 +34,7 @@ export default function Page({ providers }) {
       console.log(res.data);
       if (res.status == 201) {
         signIn("credentials", {
-          callbackUrl: "/payment/new",
+          callbackUrl: "/dashboard",
           email: email.value,
           password: password.value,
         });
@@ -75,7 +75,7 @@ export default function Page({ providers }) {
       <div className={"w-full h-[100vh] py-8 relative " + mont.className}>
         <div className="w-full h-full flex justify-center items-center">
           <div className="md:w-[30%] w-[84%] rounded-md p-4 bg-gray-100 shadow-lg">
-            <h1 className="text-bold text-3xl mb-4 text-center">Quick Start</h1>
+            <h1 className="text-bold text-3xl mb-4 text-center">Create an Account</h1>
             {providers && (
               <>
                 <div className="flex gap-x-2 md:flex-row flex-col">
@@ -131,7 +131,7 @@ export default function Page({ providers }) {
                 required
                 fullWidth
                 id="username"
-                label="Username"
+                label="First Name"
                 name="username"
                 type="text"
                 autoComplete="username"
@@ -168,7 +168,7 @@ export default function Page({ providers }) {
                 fullWidth
                 variant="contained"
               >
-                <span>Quick SignUp</span>
+                <span>Quick Start</span>
               </LoadingButton>
             </form>
             <p className="mt-2 text-sm text-gray-800">

@@ -2,6 +2,13 @@ import { authOptions } from "../../auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import axios from "axios";
 
+import rateLimit from "@/lib/rate-limit";
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+});
+
 //delete all leads from a campaign, make leads array empty[]
 export default async function handler(req, res) {
   try {
@@ -11,6 +18,8 @@ export default async function handler(req, res) {
     if (!session) {
       return res.status(401).send("Access forbidden");
     }
+
+    await limiter.check(res, 10, "CACHE_TOKEN"); // 10 requests per minute 
 
     let { location,keyword,limit } = req.query;
 
@@ -24,6 +33,6 @@ export default async function handler(req, res) {
     res.status(200).json(result.data.businesses);
   } catch (e) {
     console.error(e.response.data.error);
-    res.status(400).send(e.response.data.error.description)
+    res.status(429).json([]);
   }
 }

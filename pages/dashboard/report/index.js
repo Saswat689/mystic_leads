@@ -11,7 +11,7 @@ import { useState } from "react";
 import InnerHTML from "dangerously-set-html-content";
 import LinearProgress from "@mui/material/LinearProgress";
 
-export default function Page() {
+export default function Page({freeTrial}) {
   let [link, setLink] = useState("");
   let [reportHtml, setReportHtml] = useState(null);
   let [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function Page() {
           <InnerHTML html={reportHtml} />
         </div>
       ) : (
-        <Layout>
+        <Layout freeTrial={freeTrial}>
           <div className={"w-full h-full py-8 " + roboto.className}>
             <div className="flex p-8 pb-2 text-white bg-blue-600 rounded-lg gap-x-8">
               <div>
@@ -121,22 +121,38 @@ export async function getServerSideProps(context) {
       }
     );
 
-    //unpaid user don't allow access
-    if (!data.document?.hasPaid) {
-      return { redirect: { destination: "/payment/new" } };
-    }
+    //if user not paid and free trial over(acc older than 1 day)
+    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
 
-    return {
-      props: {
-        email: session.user.email || null,
-        username: data.document.username,
-        campaigns: data.document?.campaigns || [],
-      },
-    };
+    if (!data.document?.hasPaid) {
+      if (accAge > 1) {
+        //1 day free trial expired
+        return { redirect: { destination: "/payment/new" } };
+      } else {
+        return {
+          props: {
+            freeTrial: true,
+            email: session.user.email || null,
+            username: data.document.username,
+            campaigns: data.document?.campaigns || [],
+          },
+        };
+      }
+    } else {
+      return {
+        props: {
+          freeTrial: false,
+          email: session.user.email || null,
+          username: data.document.username,
+          campaigns: data.document?.campaigns || [],
+        },
+      };
+    }
   } catch (e) {
     console.log(e);
     return {
       props: {
+        freeTrial: true,
         email: null,
         username: "",
         campaigns: [],

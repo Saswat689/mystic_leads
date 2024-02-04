@@ -2,6 +2,13 @@ import { authOptions } from "../../auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import axios from "axios";
 
+import rateLimit from "@/lib/rate-limit";
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+});
+
 async function fetchGMB(keyword, location, radius, pagetoken) {
   try {
     //convert location to coordinates
@@ -64,6 +71,8 @@ export default async function handler(req, res) {
       return res.status(401).send("Only Post request authorised");
     }
 
+    await limiter.check(res, 10, "CACHE_TOKEN"); // 10 requests per minute 
+
     let { keyword, location, radius, pagetoken } = req.query;
 
     if (!keyword || !location || !radius) {
@@ -74,6 +83,6 @@ export default async function handler(req, res) {
 
     res.status(200).json(data);
   } catch (e) {
-    console.error(e);
+    res.status(429).json([]);
   }
 }

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 
-export default function Page({ username, campaigns }) {
+export default function Page({ username, campaigns,freeTrial }) {
   const router = useRouter();
   console.log(campaigns);
 
@@ -23,7 +23,7 @@ export default function Page({ username, campaigns }) {
   }, []);
 
   return (
-    <Layout>
+    <Layout freeTrial={freeTrial}>
       <div className={"w-full h-full py-8 " + roboto.className}>
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="p-8 rounded-md shadow-sm bg-amber-100">
@@ -166,14 +166,14 @@ export async function getServerSideProps(context) {
     }
 
     //check if it is a paid user
-    let {data} = await axios.post(
+    let { data } = await axios.post(
       `${process.env.MONGODB_URI}/findOne`,
       {
         dataSource: "cluster",
         database: "test",
         collection: "users",
         filter: {
-          email: session.user.email
+          email: session.user.email,
         },
         projection: {},
       },
@@ -186,25 +186,44 @@ export async function getServerSideProps(context) {
       }
     );
 
-    //unpaid user don't allow access
-    if (!data.document?.hasPaid) {
-      return { redirect: { destination: "/payment/new" } };
-    }
+    //if user not paid and free trial over(acc older than 1 day)
+    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
 
-    return {
-      props: {
-        email: session.user.email || null,
-        username: data.document.username,
-        campaigns: data.document?.campaigns || [],
-      },
-    };
+    console.log(accAge)
+
+    if (!data.document?.hasPaid) {
+      if (accAge > 1) {
+        //1 day free trial expired
+        return { redirect: { destination: "/payment/new" } };
+      } else {
+        return {
+          props: {
+            freeTrial: true,
+            email: session.user.email || null,
+            username: data.document.username,
+            campaigns: data.document?.campaigns || [],
+          },
+        };
+      }
+    } else {
+      return {
+        props: {
+          freeTrial: false,
+          email: session.user.email || null,
+          username: data.document.username,
+          campaigns: data.document?.campaigns || [],
+        },
+      };
+    }
   } catch (e) {
     console.log(e);
-    return { props: {
-      email: null,
-      username: '',
-      campaigns: []
-    } };
+    return {
+      props: {
+        freeTrial: true,
+        email: null,
+        username: "",
+        campaigns: [],
+      },
+    };
   }
 }
-

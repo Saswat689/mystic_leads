@@ -22,7 +22,7 @@ import AddLeadsToCampaignModal from "@/components/dashboard/addToCampaignModal";
 import { Button } from "@mui/material";
 import NewCampaignModal from "@/components/dashboard/newCampaignModal";
 
-export default function Page({ campaigns }) {
+export default function Page({ campaigns,freeTrial }) {
   const loadRef = useRef(null);
 
   const [addModal, setAddModal] = useState(false);
@@ -67,12 +67,12 @@ export default function Page({ campaigns }) {
     } catch (e) {
       setSearching(false);
       console.log(e);
-      alert(e.response.data);
+      alert('Something went wrong. Please try again later');
     }
   }
 
   return (
-    <Layout>
+    <Layout freeTrial={freeTrial}>
       <div className={"w-full h-full " + roboto.className}>
         <div className="p-4 my-12 bg-white md:p-8 rounded-xl">
           <h1 className="flex items-center mb-8 gap-x-4">
@@ -246,14 +246,14 @@ export async function getServerSideProps(context) {
     }
 
     //check if it is a paid user
-    let {data} = await axios.post(
+    let { data } = await axios.post(
       `${process.env.MONGODB_URI}/findOne`,
       {
         dataSource: "cluster",
         database: "test",
         collection: "users",
         filter: {
-          email: session.user.email
+          email: session.user.email,
         },
         projection: {},
       },
@@ -266,24 +266,42 @@ export async function getServerSideProps(context) {
       }
     );
 
-    //unpaid user don't allow access
-    if (!data.document?.hasPaid) {
-      return { redirect: { destination: "/payment/new" } };
-    }
+    //if user not paid and free trial over(acc older than 1 day)
+    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
 
-    return {
-      props: {
-        email: session.user.email || null,
-        username: data.document.username,
-        campaigns: data.document?.campaigns || [],
-      },
-    };
+    if (!data.document?.hasPaid) {
+      if (accAge > 1) {
+        //1 day free trial expired
+        return { redirect: { destination: "/payment/new" } };
+      } else {
+        return {
+          props: {
+            freeTrial: true,
+            email: session.user.email || null,
+            username: data.document.username,
+            campaigns: data.document?.campaigns || [],
+          },
+        };
+      }
+    } else {
+      return {
+        props: {
+          freeTrial: false,
+          email: session.user.email || null,
+          username: data.document.username,
+          campaigns: data.document?.campaigns || [],
+        },
+      };
+    }
   } catch (e) {
     console.log(e);
-        return { props: {
-      email: '',
-      username: '',
-      campaigns: []
-    } };
+    return {
+      props: {
+        freeTrial: true,
+        email: null,
+        username: "",
+        campaigns: [],
+      },
+    };
   }
 }

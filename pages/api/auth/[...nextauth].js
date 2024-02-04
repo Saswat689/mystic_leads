@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
 import bcrypt from "bcrypt";
 import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
 import SpotifyProvider from "next-auth/providers/spotify";
 import MongoDbAdapter from "@/lib/adapter";
 // import { MongoDBAdapter } from "@auth/mongodb-adapter";
@@ -18,6 +19,10 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
@@ -51,7 +56,7 @@ export const authOptions = {
         },
       },
       async authorize(credentials, req) {
-        console.log('inside authorize',process.env.MONGODB_URI)
+        console.log("inside authorize", process.env.MONGODB_URI);
         try {
           // Add logic here to look up the user from the credentials supplied
           let user = await axios.post(
@@ -61,7 +66,7 @@ export const authOptions = {
               database: "test",
               collection: "users",
               filter: {
-                email: credentials.email
+                email: credentials.email,
               },
               projection: {},
             },
@@ -79,7 +84,7 @@ export const authOptions = {
             return null;
           }
 
-          console.log(user.data.document)
+          console.log(user.data.document);
 
           //verify the password
           let verified = await bcrypt.compare(
@@ -87,13 +92,16 @@ export const authOptions = {
             user.data.document.password
           );
 
-          console.log('verified',verified)
+          console.log("verified", verified);
 
           if (!verified) {
             return null;
           }
 
-          return { name: user.data.document.username, email: user.data.document.email };
+          return {
+            name: user.data.document.username,
+            email: user.data.document.email,
+          };
         } catch (e) {
           console.log(e);
         }
@@ -103,7 +111,7 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log('inside signin',process.env.MONGODB_URI)
+      console.log("inside signin", process.env.MONGODB_URI);
       try {
         //if provider is discord then return true
         console.log(user);
@@ -118,7 +126,7 @@ export const authOptions = {
               database: "test",
               collection: "users",
               filter: {
-                email: user.email
+                email: user.email,
               },
               projection: {},
             },
@@ -144,6 +152,7 @@ export const authOptions = {
                   email: user.email,
                   avatar: user.image,
                   hasPaid: false,
+                  createdAt: new Date().getTime(),
                 },
               },
               {
@@ -168,7 +177,7 @@ export const authOptions = {
               database: "test",
               collection: "users",
               filter: {
-                email: user.email
+                email: user.email,
               },
               projection: {},
             },

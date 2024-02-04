@@ -26,13 +26,13 @@ export default function Price() {
           <span>/month</span>
         </h3>
         <p className="text-gray-500 pb-4 mb-4">
-          <span className="text-blue-400">Cancel Anytime</span> | 30 Days Money Back Guarantee
+          <span className="text-blue-400">Limited Time Free Access</span> | No card required
         </p>
         <Link
           className="cursor-pointer glow-on-hover border-anim bg-blue-400 hover:text-white hover:bg-blue-500 hover:font-[900] transition-all text-slate-100 font-semibold no-underline mt-4 md:text-xl text-sm px-12 py-3 md:px-20 md:py-4 uppercase"
           href="/auth/register"
         >
-          Get Instant Access
+          Start Free
         </Link>
       </div>
     </div>

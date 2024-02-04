@@ -61,6 +61,7 @@ export default async function handler(req, res) {
             password: hash,
             hasPaid: false,
             campaigns: [],
+            createdAt: new Date().getTime()
           },
         },
         {

@@ -38,7 +38,7 @@ export default function PaymentPage(props) {
         <h1 className={"text-xl font-[900] text-center "+mont.className}>Don't Pay <span className="line-through text-amber-500">$65/monthly</span> <br/>Instead Get unlimited leads for just $37/monthly</h1>
         <p className={"leading-loose "+mont.className}>
           Get access to thousands of high quality verified leads and close them
-          with the help of our built in AI tools. Create entire business audits in seconds with Mystic Leads AI website and facebook audit. Mystic Leads is available at an <span className="text-amber-500 font-semibold">ALL TIME LOW PRICE OF $37</span>. Grab it before the offer ends
+          with the help of our built in AI tools. Create entire business audits in seconds with Mystic Leads AI website and facebook audit. Mystic Leads is available at an <span className="text-amber-500 font-semibold">ALL TIME LOW PRICE OF $37</span>. Access everything with our paid plans.
         </p>
         <ul className={"list-none flex flex-col gap-y-4 pt-4 "+mont.className}>
           <li className="flex items-center gap-x-2"><CheckCircleOutlineIcon className="text-amber-500"/><span>Generate Unlimited Google Leads</span></li>
