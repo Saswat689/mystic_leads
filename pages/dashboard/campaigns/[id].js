@@ -64,8 +64,8 @@ export default function Page({ campaigns,freeTrial }) {
   return (
     <Layout freeTrial={freeTrial}>
       <div className={"w-full h-full overflow-x-hidden " + roboto.className}>
-        <div className="flex justify-between items-center">
-          <h1>{campaign?.name}</h1>
+        <div className="flex justify-between items-center my-4">
+          <h1 className="text-2xl font-bold">{campaign?.name}</h1>
           <Button
             variant="outlined"
             startIcon={<AddIcon />}
@@ -75,7 +75,13 @@ export default function Page({ campaigns,freeTrial }) {
           </Button>
         </div>
 
-        <div className="overflow-x-scroll h-[80vh] overflow-y-scroll">
+        {!campaign?.leads.length > 0 || !campaign?.leads ? (
+           <div className="flex flex-col items-center py-12 gap-y-0">
+           <h2 className="mb-2 text-2xl font-bold">No leads in this campaign yet</h2>
+           <p>Save some leads in your campaign to see something here</p>
+         </div>
+        ) : (
+<div className="overflow-x-scroll h-[80vh] overflow-y-scroll">
           <table
             className="w-full h-full mt-4 shadow-xl rounded-lg text-center p-2"
             style={{ borderTop: "2px solid #f59e0b" }}
@@ -139,6 +145,9 @@ export default function Page({ campaigns,freeTrial }) {
             </tbody>
           </table>
         </div>
+        )}
+
+        
       </div>
     </Layout>
   );
@@ -179,7 +188,7 @@ export async function getServerSideProps(context) {
     );
 
     //if user not paid and free trial over(acc older than 1 day)
-    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24) //account age in days
+    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
 
     if (!data.document?.hasPaid) {
       if (accAge > 1) {

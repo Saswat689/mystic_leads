@@ -37,7 +37,7 @@ export default function Layout({ children, freeTrial }) {
       <main className="w-full h-screen md:px-12 px-4 overflow-hidden overflow-y-scroll bg-gray-100">
         {freeTrial && (
           <div
-            className={`bg-green-50 flex justify-between items-center border-solid border-green-500 text-bold px-4 transition-all rounded-md text-sm text-green-600 mt-2 ${
+            className={`bg-green-50 flex justify-between items-center border-solid border-green-500 text-bold px-4 py-4 transition-all rounded-md text-sm text-green-600 mt-2 ${
               roboto.className
             } ${activeNotification ? "h-auto opacity-1" : "h-0 opacity-0"}`}
           >

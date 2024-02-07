@@ -14,7 +14,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import gemini from "@/components/gemini";
 import axios from "axios";
 
-export default function Page({ campaigns, username,freeTrial }) {
+export default function Page({ campaigns, username, freeTrial }) {
   const [pf, setPf] = useState("");
   const [selectedCampaign, setSelectedCampaign] = useState("");
   const [selectedLead, setSelectedLead] = useState("");
@@ -97,26 +97,26 @@ export default function Page({ campaigns, username,freeTrial }) {
         {!response && (
           <div className="flex py-8 pl-8 pr-0 text-white bg-blue-600 rounded-lg shadow-lg gap-x-4">
             <div>
-              <h2>AI writing tools</h2>
+              <h2 className="text-2xl font-bold mb-4">AI writing tools</h2>
               <p className="leading-loose">
                 Want to write that high converting email but don't know how to
                 get started? We've got you covered. Choose from pre made
                 templates or use AI to write for you.
               </p>
             </div>
-            <div>
+            <div className="w-[60%] md:block hidden">
               <img src="/undraw_ai.svg" className="w-3/4" />
             </div>
           </div>
         )}
 
         {!isNull ? (
-          <>
-            <div className="flex flex-col items-center py-12 gap-y-0">
-              <h2 className="mb-2">No campaigns created Yet</h2>
-              <p>Create campaigns to save your leads and export them</p>
-            </div>
-          </>
+          <div className="flex flex-col items-center pt-12 gap-y-0">
+            <h2 className="mb-2 text-2xl font-bold">
+              No campaigns created Yet
+            </h2>
+            <p>Create campaigns to save your leads and export them</p>
+          </div>
         ) : (
           <>
             {!pf ? (
@@ -144,7 +144,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                   <>
                     {!response ? (
                       <div className="md:px-20 px-12 py-12">
-                        <h3 className="mb-8 text-2xl">
+                        <h3 className="mb-8 text-2xl font-semibold">
                           AI Facebook Post Generator
                         </h3>
                         <div className="flex items-center justify-center gap-x-4">
@@ -219,6 +219,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                             <Button
                               onClick={GenerateFBPost}
                               variant="contained"
+                              className="bg-blue-500"
                               style={{ marginTop: "1rem" }}
                             >
                               Generate Post
@@ -233,6 +234,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                           <Button
                             onClick={() => copyText(response)}
                             variant="contained"
+                            className="bg-blue-500"
                             startIcon={<ContentCopyIcon />}
                           >
                             Copy Text
@@ -248,7 +250,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                   <>
                     {!response ? (
                       <div className="md:px-20 px-12 py-12">
-                        <h3 className="mb-8 text-2xl">
+                        <h3 className="mb-8 text-2xl font-semibold">
                           Twitter Post Generator
                         </h3>
                         <div className="flex items-center justify-center gap-x-4">
@@ -324,7 +326,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                             <Button
                               onClick={GenerateTwitterPost}
                               variant="contained"
-                              className="mt-8"
+                              className="mt-8 bg-blue-500"
                             >
                               Generate Tweet
                             </Button>
@@ -334,10 +336,11 @@ export default function Page({ campaigns, username,freeTrial }) {
                     ) : (
                       <div className="p-12">
                         <div className="flex items-center justify-between mb-8">
-                          <h3 className="text-2xl">Here's the result</h3>
+                          <h3 className="text-2xl font-bold">Here's the result</h3>
                           <Button
                             onClick={() => copyText(response)}
                             variant="contained"
+                            className="bg-blue-500"
                             startIcon={<ContentCopyIcon />}
                           >
                             Copy Text
@@ -352,7 +355,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                   <>
                     {!response ? (
                       <div className="md:px-20 px-12 py-12">
-                        <h3 className="mb-8 text-2xl">Cold Email Generator</h3>
+                        <h3 className="mb-8 text-2xl font-semibold">Cold Email Generator</h3>
                         <div className="flex items-center justify-center gap-x-4">
                           <FormControl
                             fullWidth
@@ -426,7 +429,7 @@ export default function Page({ campaigns, username,freeTrial }) {
                             <Button
                               onClick={GenerateColdEmail}
                               variant="contained"
-                              className="mt-8"
+                              className="mt-8 bg-blue-500"
                             >
                               Generate Cold Email
                             </Button>
@@ -436,11 +439,12 @@ export default function Page({ campaigns, username,freeTrial }) {
                     ) : (
                       <div className="p-12">
                         <div className="flex items-center justify-between mb-8">
-                          <h3 className="text-2xl">Here's the result</h3>
+                          <h3 className="text-2xl font-bold">Here's the result</h3>
                           <Button
                             onClick={() => copyText(response)}
                             variant="contained"
                             startIcon={<ContentCopyIcon />}
+                            className="bg-blue-500"
                           >
                             Copy Text
                           </Button>
@@ -494,7 +498,9 @@ export async function getServerSideProps(context) {
     );
 
     //if user not paid and free trial over(acc older than 1 day)
-    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
+    let accAge =
+      (new Date().getTime() - Number(data.document.createdAt)) /
+      (1000 * 60 * 24 * 60); //account age in days
 
     if (!data.document?.hasPaid) {
       if (accAge > 1) {

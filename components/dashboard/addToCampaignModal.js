@@ -21,7 +21,7 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "12px",
   boxShadow: 24,
-  p: 2,
+  p: 4,
 };
 
 export default function AddLeadsToCampaignModal({
@@ -75,7 +75,7 @@ export default function AddLeadsToCampaignModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className={roboto.className}>
-          <h1>Add Leads to Campaign</h1>
+          <h1 className="font-bold text-2xl mb-4">Add Leads to Campaign</h1>
 
           <p className="mb-8">
             Select your campaign and add leads to it so that you can save them
@@ -85,12 +85,13 @@ export default function AddLeadsToCampaignModal({
           {!isNull ? (
             <>
               <div className="flex flex-col items-center gap-y-0">
-                <h2 className="pb-0 mb-2">No campaigns created Yet</h2>
+                <h2 className="pb-0 mb-4 text-2xl font-bold">No campaigns created Yet</h2>
                 <p>Create campaigns to save your leads and export them</p>
                 <Button
                   variant="contained"
                   onClick={() => setNewCampaign(true)}
                   style={{ marginTop: "0.8rem" }}
+                  className="bg-blue-500"
                 >
                   Create A New Campaign
                 </Button>
@@ -123,6 +124,7 @@ export default function AddLeadsToCampaignModal({
                 variant="contained"
                 startIcon={<AddIcon />}
                 onClick={addLeadsToCampaign}
+                className="bg-blue-500"
               >
                 Add Selected Leads
               </Button>
@@ -130,6 +132,7 @@ export default function AddLeadsToCampaignModal({
                 variant="contained"
                 onClick={() => setNewCampaign(true)}
                 style={{ marginLeft: "0.8rem" }}
+                className="bg-blue-500"
               >
                 Create A New Campaign
               </Button>

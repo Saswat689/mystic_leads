@@ -17,7 +17,7 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "12px",
   boxShadow: 24,
-  p: 2,
+  p: 4,
 };
 
 export default function NewCampaignModal({ open, setOpen }) {
@@ -56,7 +56,7 @@ export default function NewCampaignModal({ open, setOpen }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className={roboto.className}>
-          <h1>Create A New Campaign</h1>
+          <h1 className="text-2xl mb-4 font-bold">Create A New Campaign</h1>
 
           <p className="mb-8">
             Create a new campaign to store all your leads that are similar and
@@ -78,6 +78,7 @@ export default function NewCampaignModal({ open, setOpen }) {
             variant="contained"
             startIcon={<AddIcon />}
             onClick={createCampaign}
+            className="bg-blue-500"
           >
             Add Campaign
           </Button>

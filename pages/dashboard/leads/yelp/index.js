@@ -51,6 +51,7 @@ export default function Page({ campaigns,freeTrial }) {
       setSearching(true);
 
       if (!keyword || !location) {
+        setSearching(false)
         return alert("Missing input values");
       }
 
@@ -79,15 +80,15 @@ export default function Page({ campaigns,freeTrial }) {
             <div className="flex items-center justify-center p-2 border-4 border-red-500 border-solid rounded-full">
               <Image src="/yelp-logo.svg" width={35} height={35} />
             </div>
-            <span>Search Leads on Yelp</span>
+            <span className="font-bold text-2xl">Search Leads on Yelp</span>
           </h1>
           <p className="leading-relaxed">
             Get all businesses in a given area from yelp. Fetch important
             details like phone numbers, addresses and statuses. Save them and
             enjoy.
           </p>
-          <div className="px-4 py-3 pb-8 mt-8 bg-red-100 md:px-8 rounded-xl">
-            <h2 className="font-semibold text-1xl ">
+          <div className="px-4 py-8 pb-8 mt-8 bg-red-100 md:px-8 rounded-xl">
+            <h2 className="font-semibold text-xl ">
               Search Active Business Leads on Yelp and contact them instantly.
             </h2>
             <div className="flex flex-col items-center py-4 mb-4 md:flex-row gap-x-4 gap-y-4">
@@ -140,7 +141,7 @@ export default function Page({ campaigns,freeTrial }) {
             <div className="flex items-center justify-center w-full md:block">
               <button
                 onClick={searchLeads}
-                className="primary-btn py-3 px-8 text-[18px]"
+                className="primary-btn py-2 px-7 text-[16px]"
               >
                 Search Leads
               </button>
@@ -161,7 +162,7 @@ export default function Page({ campaigns,freeTrial }) {
         {(results?.length > 0 || searching) && (
           <div className="p-8 my-12 bg-white" ref={loadRef}>
             <div className="mb-12">
-              <h2>
+              <h2 className="text-3xl font-semibold mb-8">
                 Search Results for {keyword} in {location}
               </h2>
               <div className="flex items-center gap-x-4">
@@ -170,6 +171,7 @@ export default function Page({ campaigns,freeTrial }) {
                   style={{ padding: "8px 14px" }}
                   startIcon={<AddIcon />}
                   onClick={() => setAddModal(true)}
+                  className="bg-blue-500"
                 >
                   Add Selected Leads
                 </Button>

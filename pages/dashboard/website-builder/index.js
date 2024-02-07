@@ -11,7 +11,7 @@ export default function Page({freeTrial}) {
       <div className={"w-full h-full py-8 " + roboto.className}>
         <div className="bg-blue-600 text-white flex p-8 pb-12 gap-x-8 rounded-lg">
           <div>
-            <h2>Try out the website builder</h2>
+            <h2 className="text-2xl font-bold mb-4">Try out the website builder</h2>
             <p className="leading-loose mb-8">
               Create full fledged responsive websites in seconds using simple
               drag and drop techniques. Powerful customization features and

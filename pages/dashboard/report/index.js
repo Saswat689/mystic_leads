@@ -39,14 +39,14 @@ export default function Page({freeTrial}) {
           <div className={"w-full h-full py-8 " + roboto.className}>
             <div className="flex p-8 pb-2 text-white bg-blue-600 rounded-lg gap-x-8">
               <div>
-                <h2>Generate Optimisation Report</h2>
+                <h2 className="text-2xl font-bold mb-4">Generate Optimisation Report</h2>
                 <p className="leading-loose">
                   Find faults in your website with our AI driven SEO report
                   generator. It includes all optimisation parameters you should
                   be taking into consideration such as speed,meta tags,FCP etc
                 </p>
               </div>
-              <div>
+              <div className="w-[60%] md:block hidden">
                 <img src="/undraw_report.svg" className="w-full" />
               </div>
             </div>
@@ -54,7 +54,7 @@ export default function Page({freeTrial}) {
             <div className="mt-12 bg-gray-200 rounded-lg">
               {loading && <LinearProgress />}
               <div className="flex flex-col items-center p-8">
-                <h1 className="pb-0 mb-0">Get Instant Performance Report</h1>
+                <h1 className="mb-4 text-3xl font-bold">Get Instant Performance Report</h1>
                 <p>
                   Just enter a link and see how this tool magically generates
                   performance report for you on autopilot
@@ -74,6 +74,7 @@ export default function Page({freeTrial}) {
                     variant="contained"
                     startIcon={<SearchIcon />}
                     onClick={generateReport}
+                    className="bg-blue-500"
                   >
                     Search Now
                   </Button>

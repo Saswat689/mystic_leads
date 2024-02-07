@@ -49,7 +49,7 @@ export default function Page({ campaigns,freeTrial }) {
       <main className={"py-8 w-full h-full " + roboto.className}>
         <div className="flex p-8 text-white bg-blue-600 rounded-lg">
           <div>
-            <h2>Organise your Leads into Campaigns</h2>
+            <h2 className="text-2xl mb-4 font-bold">Organise your Leads into Campaigns</h2>
             <p className="leading-loose">
               Instantly group and organise your leads into campaigns. Sort them,
               search in them and save your data. Export them in excel sheets and
@@ -66,6 +66,7 @@ export default function Page({ campaigns,freeTrial }) {
             variant="contained"
             startIcon={<AddIcon />}
             style={{ padding: "14px 12px" }}
+            className="bg-blue-500"
             onClick={() => setOpenModal(true)}
           >
             Add New Campaign
@@ -134,7 +135,7 @@ export default function Page({ campaigns,freeTrial }) {
           </table>
         ) : (
           <div className="flex flex-col items-center py-12 gap-y-0">
-            <h2 className="mb-2">No campaigns created Yet</h2>
+            <h2 className="mb-2 text-2xl font-bold">No campaigns created Yet</h2>
             <p>Create campaigns to save your leads and export them</p>
           </div>
         )}

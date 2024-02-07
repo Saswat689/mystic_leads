@@ -202,12 +202,12 @@ export default function SearchCard({
         </div>
         <img src={profileImg} className="w-full h-[200px] bg-cover my-4"/>
         <iframe
-          className="absolute top-0 left-0 w-full h-full z-[2] opacity-10"
+          className="absolute top-0 left-0 w-full h-full z-[2] opacity-10 mb-6"
           src={`https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=14&amp&output=embed`}
         ></iframe>
         <div className="z-[4] relative">
           {phone && (
-            <div className="flex gap-x-4 items-start">
+            <div className="flex gap-x-4 items-start mb-4">
               <p className="flex items-center gap-x-2">
                 <LocalPhoneIcon
                   className="text-amber-500"
@@ -220,7 +220,7 @@ export default function SearchCard({
           )}
 
           {email && (
-            <div className="flex gap-x-4 items-center">
+            <div className="flex gap-x-4 items-center mb-4">
               <p className="flex items-center gap-x-2">
                 <EmailIcon
                   className="text-amber-500"
@@ -233,7 +233,7 @@ export default function SearchCard({
           )}
 
           {address && (
-            <div className="flex gap-x-4 items-start">
+            <div className="flex gap-x-4 items-start mb-4">
               <p className="flex items-center gap-x-2">
                 <HomeIcon className="text-amber-500" style={{ fontSize: 30 }} />
                 <span className="text-sm font-semibold">Address</span>
@@ -243,7 +243,7 @@ export default function SearchCard({
           )}
 
           {categories.length > 0 && (
-            <div className="flex gap-x-4 items-center overflow-auto">
+            <div className="flex gap-x-4 items-center overflow-auto mb-4">
               <p className="flex items-center gap-x-2">
                 <PersonIcon
                   className="text-amber-500"
@@ -276,7 +276,7 @@ export default function SearchCard({
     return (
       // profileLink,name,profileImg,website,phone,ratings,vicinity
       <div className="p-8 rounded-lg bg-gray-50 overflow-auto shadow-md">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <a
             className="text-gray-900 no-underline hover:underline text-lg font-semibold hover:text-amber-500 transition-all"
             href={profileLink}
@@ -291,7 +291,7 @@ export default function SearchCard({
           />
         </div>
         <iframe
-          className="w-full h-auto my-4"
+          className="w-full h-auto my-7"
           frameBorder="0"
           marginHeight="0"
           marginWidth="0"
@@ -299,7 +299,7 @@ export default function SearchCard({
         ></iframe>
         <div>
           {data.website && (
-            <div className="flex gap-x-4 items-center">
+            <div className="flex gap-x-4 items-center mb-4">
               <p className="flex items-center gap-x-2">
                 <LaptopChromebookIcon
                   className="text-amber-500"
@@ -316,7 +316,7 @@ export default function SearchCard({
           )}
 
           {data.formatted_phone_number && (
-            <div className="flex gap-x-4 items-start">
+            <div className="flex gap-x-4 items-start mb-4">
               <p className="flex items-center gap-x-2">
                 <LocalPhoneIcon
                   className="text-amber-500"
@@ -331,7 +331,7 @@ export default function SearchCard({
           )}
 
           {ratings && (
-            <div className="flex gap-x-4 items-start">
+            <div className="flex gap-x-4 items-start mb-4">
               <p className="flex items-center gap-x-2">
                 <GradeIcon
                   className="text-amber-500"

@@ -114,18 +114,18 @@ export default function Page({ campaigns,freeTrial }) {
             <div className="flex items-center justify-center p-2 border-4 border-solid rounded-full border-amber-500">
               <Image src="/google-logo.svg" width={35} height={35} />
             </div>
-            <span>Search Leads on Google</span>
+            <span className="font-bold text-2xl">Search Leads on Google</span>
           </h1>
           <p className="leading-relaxed">
             Search google leads with their phone numbers and names. Filter out
             leads by exact location and radius. Great for precise location
             leads.
           </p>
-          <div className="px-8 py-3 mt-8 rounded-xl bg-amber-100">
+          <div className="px-8 py-8 mt-8 rounded-xl bg-amber-100">
             <h2 className="text-2xl font-semibold ">
               Search Active Business Leads on Google and contact them instantly.
             </h2>
-            <div className="flex flex-col items-center py-4 mb-8 md:flex-row gap-x-4 gap-y-4">
+            <div className="flex flex-col items-center py-4 mb-4 md:flex-row gap-x-4 gap-y-4">
               <TextField
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
@@ -195,7 +195,7 @@ export default function Page({ campaigns,freeTrial }) {
         {(results?.length > 0 || searching) && (
           <div className="p-8 my-12 bg-white" ref={myRef}>
             <div className="mb-12">
-              <h2>
+              <h2 className="text-3xl mb-8 font-semibold">
                 Search Results for {keyword} in {location}
               </h2>
               <div className="flex items-center gap-x-4">
@@ -204,6 +204,7 @@ export default function Page({ campaigns,freeTrial }) {
                   style={{ padding: "8px 14px" }}
                   startIcon={<AddIcon />}
                   onClick={() => setAddModal(true)}
+                  className="bg-blue-500"
                 >
                   Add Selected Leads
                 </Button>

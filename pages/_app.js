@@ -6,7 +6,7 @@ import 'video-react/dist/video-react.css'; // import css
 
 import axios from "axios";
 import Script from "next/script";
-
+import '../styles/globals.css'
 // axios.defaults.baseURL = 'https://www.mysticleads.com';
 axios.defaults.baseURL = process.env.NEXTAUTH_URL;
 

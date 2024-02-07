@@ -19,19 +19,20 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    // }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true
+    }),
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      allowDangerousEmailAccountLinking: true,
+      allowDangerousEmailAccountLinking: true
     }),
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      allowDangerousEmailAccountLinking: true,
+      allowDangerousEmailAccountLinking: true
     }),
     EmailProvider({
       server: {
@@ -111,13 +112,13 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("inside signin", process.env.MONGODB_URI);
+      console.log("inside signin");
       try {
         //if provider is discord then return true
-        console.log(user);
-        console.log(account);
+        // console.log(user);
+        // console.log(account);
 
-        if (account.provider == "discord" || account.provider == "spotify") {
+        if (account.provider == "discord" || account.provider == "google") {
           //create a new user if it doesn't exist
           let founduser = await axios.post(
             `${process.env.MONGODB_URI}/findOne`,

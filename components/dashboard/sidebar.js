@@ -1,5 +1,4 @@
 import { roboto } from "@/config";
-import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 import GroupsIcon from "@mui/icons-material/Groups";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
@@ -7,16 +6,7 @@ import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import Link from "next/link";
 import BrushIcon from "@mui/icons-material/Brush";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-
-const bgGradient = {
-  background: "#0F2027" /* fallback for old browsers */,
-  background:
-    "-webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027)" /* Chrome 10-25, Safari 5.1-6 */,
-  background:
-    "linear-gradient(to right, #2C5364, #203A43, #0F2027)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
-};
 
 const textClassNameResponsive = `hidden md:block text-start flex items-center justify-center w-full h-full`;
 
@@ -31,7 +21,7 @@ export default function Sidebar({ active, setActiveSideBar }) {
         roboto.className
       }
     >
-      <div className="hidden lg:flex items-start justify-center w-full">
+      <div className="hidden lg:flex items-start justify-center w-full mb-4">
         <img
           src="/logo2.jpeg"
           className="w-[110px] cursor-pointer"

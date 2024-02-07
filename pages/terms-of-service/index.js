@@ -1,4 +1,3 @@
-import Footer from "@/components/home/footer";
 import { mont } from "@/config";
 import Head from "next/head";
 
@@ -58,7 +57,6 @@ export default function Page() {
         us here: support@mysticleads.com
       </p>
     </div>
-    <Footer />
     </>
   );
 }

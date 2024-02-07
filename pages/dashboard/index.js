@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 
-export default function Page({ username, campaigns,freeTrial }) {
+export default function Page({ username, campaigns, freeTrial }) {
   const router = useRouter();
   console.log(campaigns);
 
@@ -27,7 +27,7 @@ export default function Page({ username, campaigns,freeTrial }) {
       <div className={"w-full h-full py-8 " + roboto.className}>
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="p-8 rounded-md shadow-sm bg-amber-100">
-            <h3 className={"font-[800] text-2xl " + mont.className}>
+            <h3 className={"font-bold text-2xl mb-4 " + mont.className}>
               Make 2024 your year!
             </h3>
             <p className="leading-loose">
@@ -36,7 +36,7 @@ export default function Page({ username, campaigns,freeTrial }) {
             </p>
           </div>
           <div className="p-8 bg-blue-100 rounded-md shadow-sm">
-            <h3 className={"font-[800] text-2xl " + mont.className}>
+            <h3 className={"font-[800] text-2xl mb-4 " + mont.className}>
               Welcome {username}!
             </h3>
             <p className="leading-loose">
@@ -51,11 +51,12 @@ export default function Page({ username, campaigns,freeTrial }) {
           <div className="mt-16">
             <div className="flex gap-x-12 md:flex-row flex-col gap-y-4">
               <div className="md:w-1/2 w-full">
-                <div className="flex items-center gap-x-8">
-                  <h3 className="text-2xl">Latest Campaigns</h3>
+                <div className="flex items-center gap-x-8 mb-4">
+                  <h3 className="text-2xl font-semibold">Latest Campaigns</h3>
                   <Button
                     onClick={() => router.push("/dashboard/campaigns")}
                     variant="contained"
+                    className="bg-blue-500"
                   >
                     View All
                   </Button>
@@ -86,11 +87,12 @@ export default function Page({ username, campaigns,freeTrial }) {
               </div>
 
               <div className="md:w-1/2 w-full">
-                <div className="flex items-center gap-x-8">
-                  <h3 className="text-2xl">Latest Saved Leads</h3>
+                <div className="flex items-center gap-x-8 mb-4">
+                  <h3 className="text-2xl font-semibold">Latest Saved Leads</h3>
                   <Button
                     onClick={() => router.push("/dashboard/campaigns")}
                     variant="contained"
+                    className="bg-blue-500"
                   >
                     View All
                   </Button>
@@ -126,26 +128,28 @@ export default function Page({ username, campaigns,freeTrial }) {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center py-12 gap-y-0">
-            <h2 className="mb-2">No campaigns created Yet</h2>
+          <div className="flex flex-col items-center pt-12 gap-y-0">
+            <h2 className="mb-2 text-2xl font-bold">
+              No campaigns created Yet
+            </h2>
             <p>Create campaigns to save your leads and export them</p>
           </div>
         )}
 
         <div className="py-4 my-12 text-center bg-blue-100 rounded-lg">
-          <h3 className="pb-0 mb-0 md:text-2xl text-xl font-bold">
+          <h3 className="pb-4 mb-0 md:text-2xl text-2xl font-bold">
             Try Out The Website Builder Today!
           </h3>
-          <p>
+          <p className="pb-4">
             Create websites with simple drag and drop. Responsive and SEO
             friendly.
           </p>
-          <Button
+          <button
             onClick={() => router.push("/dashboard/website-builder")}
-            variant="contained"
+            className="primary-btn py-2 px-7 text-[16px]"
           >
             Create Now!
-          </Button>
+          </button>
         </div>
       </div>
     </Layout>
@@ -187,9 +191,11 @@ export async function getServerSideProps(context) {
     );
 
     //if user not paid and free trial over(acc older than 1 day)
-    let accAge = (new Date().getTime() - Number(data.document.createdAt))/(1000*60*24*60) //account age in days
+    let accAge =
+      (new Date().getTime() - Number(data.document.createdAt)) /
+      (1000 * 60 * 24 * 60); //account age in days
 
-    console.log(accAge)
+    console.log(accAge);
 
     if (!data.document?.hasPaid) {
       if (accAge > 1) {
