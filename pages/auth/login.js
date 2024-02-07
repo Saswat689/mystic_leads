@@ -1,11 +1,12 @@
 
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { useSearchParams } from "next/navigation";
 
 import Signin from "@/components/Auth/Signin";
 import RootLayout from "../layout";
+import Head from "next/head";
 
 export default function Page({ providers }) {
   const errorParams = useSearchParams();
@@ -14,6 +15,20 @@ export default function Page({ providers }) {
   return (
     <>
       <RootLayout>
+      <Head>
+        <title>Login to your account</title>
+        <meta
+          name="description"
+          content="Login to your account on mystic leads and start your journey."
+          key="desc"
+        />
+        <meta property="og:title" content="Login to your account" />
+        <meta
+          property="og:description"
+          content="Login to your account on mystic leads and start your journey."
+        />
+        <meta property="og:image" content="/og-img.png" />
+      </Head>
         <Signin providers={providers} error={error}/>
       </RootLayout>
     </>

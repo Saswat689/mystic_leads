@@ -144,4 +144,7 @@ module.exports = {
     },
   },
   plugins: [],
+  variants: {
+    opacity: ({ after }) => after(['disabled'])
+  }
 };

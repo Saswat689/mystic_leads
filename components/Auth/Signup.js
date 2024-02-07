@@ -17,7 +17,7 @@ const Signup = ({ providers, error }) => {
   });
 
   async function handleSubmit(event) {
-    console.log(event)
+    console.log(event);
     event.preventDefault();
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
@@ -43,7 +43,11 @@ const Signup = ({ providers, error }) => {
       console.log(err);
       //user already exists
       if (err?.response?.status == 409) {
-        router.push("/auth/login");
+        signIn("credentials", {
+          callbackUrl: "/dashboard",
+          email: data.email,
+          password: data.password,
+        });
       }
       console.log(err);
     }
@@ -202,9 +206,10 @@ const Signup = ({ providers, error }) => {
 
               <div className="flex justify-center">
                 <button
+                  disabled={loading ? true : false}
                   type="submit"
                   aria-label="signup with email and password"
-                  className="inline-flex mx-auto items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
+                  className="inline-flex mx-auto items-center gap-2.5 disabled:opacity-20 disabled:cursor-not-allowed rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark dark:hover:bg-blackho"
                 >
                   Create Account
                   <svg

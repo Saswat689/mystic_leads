@@ -5,6 +5,7 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import Signup from "@/components/Auth/Signup";
 import RootLayout from "../layout";
 import { useSearchParams } from "next/navigation";
+import Head from "next/head";
 
 export default function Page({ providers }) {
 
@@ -15,6 +16,23 @@ export default function Page({ providers }) {
   return (
     <>
       <RootLayout>
+      <Head>
+        <title>Get started by creating a new account</title>
+        <meta
+          name="description"
+          content="Register an account on mystic leads and start your journey."
+          key="desc"
+        />
+        <meta
+          property="og:title"
+          content="Get started by creating a new account"
+        />
+        <meta
+          property="og:description"
+          content="Create an account on mystic leads and start your journey."
+        />
+        <meta property="og:image" content="/og-img.png" />
+      </Head>
         <Signup providers={providers} error={error}/>
       </RootLayout>
     </>
